@@ -1,0 +1,4 @@
+# flask_movie
+a website for movie with flask
+# [第一阶段：前端布局](https://github.com/chistoiy/flask_movie/tree/5e5eb6e96119f3e7aa46b3ba4f880393fab566d3) 
+# ]第二阶段：后端布局](https://github.com/chistoiy/flask_movie/tree/92c5b0a000fb28620391fdc00f66c0c5e67c5a6e)
