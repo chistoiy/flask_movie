@@ -1,13 +1,44 @@
 from .import admin
-from flask import render_template,redirect,session,url_for
+from flask import render_template,redirect,session,url_for,flash,sessions,request
 
+from functools import wraps
 
-@admin.route("/login/")
+def admin_login_req(f):
+    """
+    登录装饰器
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "admin" not in session:
+            return redirect(url_for("admin.login", next=request.url))
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+from movie.admin.forms import LoginForm
+from movie.models import Admin
+@admin.route("/login/",methods=['POST','GET'])
 def login():
     """
     后台登录
     """
-    return render_template("admin/login.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        data = form.data
+        admin = Admin.query.filter_by(name=data["account"]).first()
+        if not admin.check_pwd(data["pwd"]):
+            flash("密码错误!")
+            return redirect(url_for("admin.login"))
+        # 如果是正确的，就要定义session的会话进行保存。
+        session["admin"] = data["account"]
+        return redirect(request.args.get("next") or url_for("admin.index"))
+    return render_template("admin/login.html",form=form)
+'''from werkzeug.security import generate_password_hash
+
+    admin = Admin(
+        name="mtianyan",
+        pwd=generate_password_hash("123456")
+'''
 
 
 @admin.route("/logout/")
@@ -15,6 +46,7 @@ def logout():
     """
     后台注销登录
     """
+    session.pop("admin", None)
     return redirect(url_for("admin.login"))
 
 
@@ -23,6 +55,7 @@ def index():
     return render_template("admin/index.html")
 
 @admin.route("/pwd/")
+@admin_login_req
 def pwd():
     """
     后台密码修改
