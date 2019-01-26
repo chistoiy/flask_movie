@@ -1,6 +1,6 @@
 from flask import Flask,render_template
 
-
+import os
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 from .models import  *
@@ -22,6 +22,9 @@ def create_app():
     app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
     db.init_app(app)
     app.config['SECRET_KEY'] = '123456'
+
+    app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static","uploads")
+
     @app.errorhandler(404)
     def page_not_found(error):
         """
