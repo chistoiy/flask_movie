@@ -93,16 +93,19 @@
         </section>
         <!--内容-->{% endblock %}
 {% block js %}
-    <script src="../static/jwplayer/jwplayer.js"></script>
+    <script src="{{ url_for('static',filename='jwplayer/jwplayer.js') }}"></script>
 <script type="text/javascript">
     jwplayer.key = "P9VTqT/X6TSP4gi/hy1wy23BivBhjdzVjMeOaQ==";
 
 </script>
 <script type="text/javascript">
+function a(){
     jwplayer("moviecontainer").setup({
         flashplayer: "{{ url_for('static',filename='jwplayer/jwplayer.flash.swf') }}",
         playlist: [{
-            file: "{{ url_for('static',filename='video/htpy.mp4')}}",
+
+            file: $('input#url').val(),
+            {#file:"{{ url_for('static',filename='uploads/201901271445567c3f32725a474e5abc616a2167210a4c.mp4') }}",#}
             title: "环太平洋"
         }],
         modes: [{
@@ -121,6 +124,12 @@
         height: 250,
         width: 387,
     });
+
+}
+$("input#url").change(function(){
+  a();
+});
+
 
 </script>
 <script>

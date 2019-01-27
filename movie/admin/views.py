@@ -160,7 +160,7 @@ def movie_add():
         if not os.path.exists(current_app.config["UP_DIR"]):
             # 创建一个多级目录
             os.makedirs(current_app.config["UP_DIR"])
-            print('_______',current_app.config["UP_DIR"])
+            #print('_______',current_app.config["UP_DIR"])
             import  sys, stat
             import platform
             #因为windows chmod方法第一次改变文件夹读写时会异常报错，所以修改为判断平台方式
@@ -169,9 +169,6 @@ def movie_add():
                 os.chmod(current_app.config["UP_DIR"], stat.S_IWRITE and stat.S_IREAD)
             else:
                 os.chmod(current_app.config["UP_DIR"], "rw")
-
-
-
         url = change_filename(file_url)
         logo = change_filename(file_logo)
         # 保存
@@ -198,27 +195,167 @@ def movie_add():
     return render_template("admin/movie_add.html", form=form)
 
 
-@admin.route("/movie/list/")
-def movie_list():
+@admin.route("/movie/list/<int:page>",methods=['GET','POST'])
+def movie_list(page=None):
     """
     电影列表页面
     """
-    return render_template("admin/movie_list.html")
+    if page is None:
+        page = 1
+    page_data = Movie.query.join(Tag).filter(Tag.id == Movie.tag_id).order_by(Movie.addtime.desc()).paginate(page = page,per_page=1)
 
-@admin.route("/preview/add/")
+    return render_template("admin/movie_list.html",page_data=page_data)
+
+@admin.route("/movie/del/<int:id>",methods=['GET'])
+def movie_del(id=None):
+    """
+    电影列表页面
+    """
+    movie = Movie.query.get_or_404(id)
+    db.session.delete(movie)
+    db.session.commit()
+    flash('电源删除成功','ok')
+
+    return redirect(url_for("admin.movie_list",page=1))
+
+@admin.route("/movie/edit/<int:id>/", methods=["GET", "POST"])
+@admin_login_req
+def movie_edit(id=None):
+    """
+    编辑电影页面
+    """
+    form = MovieForm()
+    form.url.validators = []
+    form.logo.validators = []
+    movie = Movie.query.get_or_404(int(id))
+    if request.method == "GET":
+        form.info.data = movie.info
+        form.tag_id.data = movie.tag_id
+        form.star.data = movie.star
+    if form.validate_on_submit():
+        data = form.data
+        movie_count = Movie.query.filter_by(title=data["title"]).count()
+        # 存在一步名字叫这个的电影，有可能是它自己，也有可能是同名。如果是现在的movie不等于要提交的数据中title。那么说明有两个。
+        if movie_count == 1 and movie.title != data["title"]:
+            flash("片名已经存在！", "err")
+            return redirect(url_for('admin.movie_edit', id=id))
+        # 创建目录
+        if not os.path.exists(current_app.config["UP_DIR"]):
+            os.makedirs(current_app.config["UP_DIR"])
+            #os.chmod(current_app.config["UP_DIR"], "rw")
+            import platform,stat
+            osName = platform.system()
+            if (osName == 'Windows'):
+                os.chmod(current_app.config["UP_DIR"], stat.S_IWRITE and stat.S_IREAD)
+            else:
+                os.chmod(current_app.config["UP_DIR"], "rw")
+        # 上传视频
+        if form.url.data != "":
+            file_url = secure_filename(form.url.data.filename)
+            movie.url = change_filename(file_url)
+            form.url.data.save(os.path.join(current_app.config["UP_DIR"],movie.url))
+        # 上传图片
+        if form.logo.data != "":
+            file_logo = secure_filename(form.logo.data.filename)
+            movie.logo = change_filename(file_logo)
+            form.logo.data.save(os.path.join(current_app.config["UP_DIR"],movie.logo))
+
+        movie.star = data["star"]
+        movie.tag_id = data["tag_id"]
+        movie.info = data["info"]
+        movie.title = data["title"]
+        movie.area = data["area"]
+        movie.length = data["length"]
+        movie.release_time = data["release_time"]
+        db.session.add(movie)
+        db.session.commit()
+        flash("修改电影成功！", "ok")
+        return redirect(url_for('admin.movie_edit', id=movie.id))
+
+    return render_template("admin/movie_edit.html", form=form,movie=movie)
+
+from .forms import PreviewForm
+from movie.models import Preview
+@admin.route("/preview/add/",methods=['GET','POST'])
 def preview_add():
     """
     上映预告添加
     """
-    return render_template("admin/preview_add.html")
+    form = PreviewForm()
+    if form.validate_on_submit():
+        data= form.data
+        file_logo = secure_filename(form.logo.data.filename)
+        if not os.path.exists(current_app.config["UP_DIR"]):
+            os.makedirs(current_app.config["UP_DIR"])
+        #os.chmod(app.config["UP_DIR"], "rw")
+            import platform, stat
+            osName = platform.system()
+            if (osName == 'Windows'):
+                os.chmod(current_app.config["UP_DIR"], stat.S_IWRITE and stat.S_IREAD)
+            else:
+                os.chmod(current_app.config["UP_DIR"], "rw")
+        logo = change_filename(file_logo)
+        form.logo.data.save(os.path.join(current_app.config["UP_DIR"] , logo))
+        preview = Preview(
+            title=data["title"],
+            logo=logo
+        )
+        db.session.add(preview)
+        db.session.commit()
+        flash("添加预告成功！", "ok")
+        return redirect(url_for('admin.preview_add'))
+    return render_template("admin/preview_add.html",form=form)
 
 
-@admin.route("/preview/list/")
-def preview_list():
+@admin.route("/preview/list/<int:page>/", methods =["GET"])
+@admin_login_req
+def preview_list(page=None):
     """
     上映预告列表
     """
-    return render_template("admin/preview_list.html")
+    if page is None:
+        page = 1
+    page_data = Preview.query.order_by(
+    Preview.addtime.desc()
+    ).paginate(page=page, per_page=1)
+    return render_template("admin/preview_list.html", page_data=page_data)
+
+@admin.route("/preview/del/<int:id>/", methods=["GET"])
+@admin_login_req
+def preview_del(id=None):
+    """
+    预告删除
+    """
+    preview = Preview.query.get_or_404(id)
+    db.session.delete(preview)
+    db.session.commit()
+    flash("预告删除成功", "ok")
+    return redirect(url_for('admin.preview_list', page=1))
+@admin.route("/preview/edit/<int:id>/", methods=["GET",'POST'])
+@admin_login_req
+def preview_edit(id):
+    """
+    编辑预告
+    """
+    form = PreviewForm()
+    # 下面这行代码禁用编辑时的提示:封面不能为空
+    form.logo.validators = []
+    preview = Preview.query.get_or_404(int(id))
+    # get方法时，为title赋初值
+    if request.method == "GET":
+        form.title.data = preview.title
+    if form.validate_on_submit():
+        data = form.data
+        if form.logo.data != "":
+            file_logo = secure_filename(form.logo.data.filename)
+            preview.logo = change_filename(file_logo)
+            form.logo.data.save(os.path.join(current_app.config["UP_DIR"] ,preview.logo))
+        preview.title = data["title"]
+        db.session.add(preview)
+        db.session.commit()
+        flash("修改预告成功！", "ok")
+        return redirect(url_for('admin.preview_edit', id=id))
+    return render_template("admin/preview_edit.html", form=form, preview=preview)
 
 @admin.route("/user/list/")
 def user_list():
