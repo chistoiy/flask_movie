@@ -8,3 +8,4 @@ a website for movie with flask
 * 0.3-[电影管理与预告管理](https://github.com/chistoiy/flask_movie/tree/9739de97e1aa0cd6d86830055ae4d3d907492fbe)  
 * 0.4-[用户与评论管理](https://github.com/chistoiy/flask_movie/tree/cc3d324c3421de702d54c4f1d8325c51e7baae34)  
 * 0.5-[收藏管理，密码修改，用户头像设置](https://github.com/chistoiy/flask_movie/tree/f6ec4ee17a3f17a8002d6d345b835080ac864885)  
+* 0.6-[操作/管理员登陆/用户登录日志保存与查看](https://github.com/chistoiy/flask_movie/tree/7ba53ec65b45785be7ba2da242206d5c5068b0bf)
