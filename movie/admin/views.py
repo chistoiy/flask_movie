@@ -357,27 +357,91 @@ def preview_edit(id):
         return redirect(url_for('admin.preview_edit', id=id))
     return render_template("admin/preview_edit.html", form=form, preview=preview)
 
-@admin.route("/user/list/")
-def user_list():
+
+from movie.models import User
+@admin.route("/user/list/<int:page>/", methods=["GET"])
+@admin_login_req
+def user_list(page =None):
     """
     会员列表
     """
-    return render_template("admin/user_list.html")
+    if page is None:
+        page = 1
+    page_data = User.query.order_by(
+    User.addtime.desc()
+    ).paginate(page=page, per_page=1)
+    return render_template("admin/user_list.html", page_data=page_data)
 
 
-@admin.route("/user/view/")
-def user_view():
+@admin.route("/user/view/<int:id>/", methods=["GET"])
+@admin_login_req
+def user_view(id=None):
     """
-    查看会员
+    查看会员详情
     """
-    return render_template("admin/user_view.html")
+    from_page = request.args.get('fp')
+    # 兼容不加参数的无来源页面访问。
+    if not from_page:
+        from_page = 1
+    user = User.query.get_or_404(int(id))
+    return render_template("admin/user_view.html", user=user, from_page=from_page)
 
-@admin.route("/comment/list/")
-def comment_list():
+@admin.route("/user/del/<int:id>/", methods=["GET"])
+@admin_login_req
+def user_del(id=None):
+    """
+    删除会员
+    """
+    # 因为删除当前页。假如是最后一页，这一页已经不见了。回不到。
+    from_page = int(request.args.get('fp')) -1
+    # 此处考虑全删完了，没法前挪的情况，0被视为false
+    if not from_page:
+        from_page = 1
+    user = User.query.get_or_404(int(id))
+    db.session.delete(user)
+    db.session.commit()
+    flash("删除会员成功！", "ok")
+    return redirect(url_for('admin.user_list', page=from_page))
+
+from movie.models import Comment
+@admin.route("/comment/list/<int:page>/", methods=["GET"])
+@admin_login_req
+def comment_list(page=None):
     """
     评论列表
     """
-    return render_template("admin/comment_list.html")
+    if page is None:
+        page = 1
+    # 通过评论join查询其相关的movie，和相关的用户。
+    # 然后过滤出其中电影id等于评论电影id的电影，和用户id等于评论用户id的用户
+    page_data = Comment.query.join(
+    Movie
+    ).join(
+    User
+    ).filter(
+    Movie.id == Comment.movie_id,
+    User.id == Comment.user_id
+    ).order_by(
+    Comment.addtime.desc()
+    ).paginate(page=page, per_page=1)
+    return render_template("admin/comment_list.html", page_data=page_data)
+
+@admin.route("/comment/del/<int:id>/", methods=["GET"])
+@admin_login_req
+def comment_del(id=None):
+    """
+    删除评论
+    """
+    # 因为删除当前页。假如是最后一页，这一页已经不见了。回不到。
+    from_page = int(request.args.get('fp')) - 1
+    # 此处考虑全删完了，没法前挪的情况，0被视为false
+    if not from_page:
+        from_page = 1
+    comment = Comment.query.get_or_404(int(id))
+    db.session.delete(comment)
+    db.session.commit()
+    flash("删除评论成功！", "ok")
+    return redirect(url_for('admin.comment_list', page=from_page))
 
 @admin.route("/moviecol/list/")
 def moviecol_list():
