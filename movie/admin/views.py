@@ -15,6 +15,7 @@ def admin_login_req(f):
 
     return decorated_function
 
+from flask import current_app,g
 from movie.admin.forms import LoginForm
 from movie.models import Admin
 @admin.route("/login/",methods=['POST','GET'])
@@ -26,11 +27,18 @@ def login():
     if form.validate_on_submit():
         data = form.data
         admin = Admin.query.filter_by(name=data["account"]).first()
+        #g.logo = os.path.join(current_app.static_folder, 'admin','dist','img','user1-160x160.jpg')
+        #print(g.logo)
+        #g.logo = 'user1-160x160.jpg'
+        from movie import create_app
+        print('aaa',dir(create_app))
         if not admin.check_pwd(data["pwd"]):
             flash("密码错误!")
             return redirect(url_for("admin.login"))
         # 如果是正确的，就要定义session的会话进行保存。
         session["admin"] = data["account"]
+        session['logo']='user2-160x160.jpg'
+
         return redirect(request.args.get("next") or url_for("admin.index"))
     return render_template("admin/login.html",form=form)
 '''from werkzeug.security import generate_password_hash
@@ -54,13 +62,25 @@ def logout():
 def index():
     return render_template("admin/index.html")
 
-@admin.route("/pwd/")
+from .forms import PwdForm
+@admin.route("/pwd/", methods=["GET", "POST"])
 @admin_login_req
 def pwd():
     """
     后台密码修改
     """
-    return render_template("admin/pwd.html")
+    form = PwdForm()
+    # 有下面这两句才有错误信息提示
+    if form.validate_on_submit():
+        data = form.data
+        admin = Admin.query.filter_by(name=session["admin"]).first()
+        from werkzeug.security import generate_password_hash
+        admin.pwd = generate_password_hash(data["new_pwd"])
+        db.session.add(admin)
+        db.session.commit()
+        flash("修改密码成功，请重新登录！", "ok")
+        return redirect(url_for('admin.logout'))
+    return render_template("admin/pwd.html",form=form)
 
 from .forms import TagForm
 from movie.models import Tag
@@ -443,12 +463,43 @@ def comment_del(id=None):
     flash("删除评论成功！", "ok")
     return redirect(url_for('admin.comment_list', page=from_page))
 
-@admin.route("/moviecol/list/")
-def moviecol_list():
+from movie.models import Moviecol
+@admin_login_req
+@admin.route("/moviecol/list/<int:page>/", methods=["GET"])
+def moviecol_list(page=None):
     """
     电影收藏
     """
-    return render_template("admin/moviecol_list.html")
+    if page is None:
+        page = 1
+    page_data = Moviecol.query.join(
+    Movie
+    ).join(
+    User
+    ).filter(
+    Movie.id == Moviecol.movie_id,
+    User.id == Moviecol.user_id
+    ).order_by(
+    Moviecol.addtime.desc()
+    ).paginate(page=page, per_page=1)
+    return render_template("admin/moviecol_list.html", page_data=page_data)
+
+@admin.route("/moviecol/del/<int:id>/", methods=["GET"])
+@admin_login_req
+def moviecol_del(id=None):
+    """
+    收藏删除
+    """
+    # 因为删除当前页。假如是最后一页，这一页已经不见了。回不到。
+    from_page = int(request.args.get('fp')) - 1
+    # 此处考虑全删完了，没法前挪的情况，0被视为false
+    if not from_page:
+        from_page = 1
+    moviecol = Moviecol.query.get_or_404(int(id))
+    db.session.delete(moviecol)
+    db.session.commit()
+    flash("删除收藏成功！", "ok")
+    return redirect(url_for('admin.moviecol_list',page=from_page))
 
 @admin.route("/oplog/list/")
 def oplog_list():
