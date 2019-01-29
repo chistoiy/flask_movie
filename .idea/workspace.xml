@@ -2,12 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed1519a3-7e5a-4f24-91eb-6ff1309c5625" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/movie/templates/admin/auth_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie/templates/admin/role_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/admin/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie/admin/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie/admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie/admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie/templates/admin/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie/templates/admin/adminloginlog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/adminloginlog_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/admin_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/admin_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/admin_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/admin_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/auth_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/auth_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/auth_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/auth_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie/templates/admin/grid.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/grid.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie/templates/admin/oplog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/oplog_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie/templates/admin/userloginlog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/userloginlog_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/role_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/role_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie/templates/admin/role_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movie/templates/admin/role_list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +24,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/flask_movie$Flask__create_db_py_.coverage" NAME="Flask (create_db.py) Coverage Results" MODIFIED="1548509492978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flask_movie$Flask__manage_py_.coverage" NAME="Flask (manage.py) Coverage Results" MODIFIED="1548687679373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask_movie$Flask__manage_py_.coverage" NAME="Flask (manage.py) Coverage Results" MODIFIED="1548775499980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -60,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie/admin/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="582" column="37" lean-forward="true" selection-start-line="582" selection-start-column="37" selection-end-line="582" selection-end-column="37" />
+            <state relative-caret-position="291">
+              <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="32" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -70,49 +77,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/userlog">
+        <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-452">
+              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/admin">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/adminlog">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie/templates/admin/userloginlog_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="47" column="7" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie/templates/admin/oplog_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="44" column="51" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie/templates/admin/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-              <folding>
-                <element signature="n#style#0;n#p#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -120,38 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie/templates/admin/grid.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="133" column="80" selection-start-line="133" selection-start-column="80" selection-end-line="133" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/movie/templates/admin/adminloginlog_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie/admin/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="246" column="33" lean-forward="true" selection-start-line="246" selection-start-column="33" selection-end-line="246" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="596">
+              <caret line="192" column="32" lean-forward="true" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -173,6 +129,7 @@
       <find>admin</find>
       <find>pwd</find>
       <find>pull</find>
+      <find>iniy</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,8 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/movie/templates/home/register.html" />
-        <option value="$PROJECT_DIR$/movie/static/tpl/2-movie/loginlog.html" />
         <option value="$PROJECT_DIR$/movie/templates/home/user.html" />
         <option value="$PROJECT_DIR$/movie/templates/home/pwd.html" />
         <option value="$PROJECT_DIR$/movie/templates/home/menu.html" />
@@ -199,12 +154,6 @@
         <option value="$PROJECT_DIR$/movie/templates/home/404.html" />
         <option value="$PROJECT_DIR$/movie/admin/__init__.py" />
         <option value="$PROJECT_DIR$/movie/templates/admin/index.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/auth_add.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/auth_list.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/role_add.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/role_list.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/admin_add.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/admin_list.html" />
         <option value="$PROJECT_DIR$/create_db.py" />
         <option value="$PROJECT_DIR$/movie/models.py" />
         <option value="$PROJECT_DIR$/movie/templates/admin/tag_add.html" />
@@ -219,26 +168,34 @@
         <option value="$PROJECT_DIR$/movie/templates/admin/preview_edit.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/user_view.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/user_list.html" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/movie/templates/admin/comment_list.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/moviecol_list.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/pwd.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/login.html" />
         <option value="$PROJECT_DIR$/movie/__init__.py" />
-        <option value="$PROJECT_DIR$/movie/admin/forms.py" />
         <option value="$PROJECT_DIR$/movie/templates/admin/admin.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/oplog_list.html" />
-        <option value="$PROJECT_DIR$/movie/templates/admin/grid.html" />
-        <option value="$PROJECT_DIR$/movie/admin/views.py" />
         <option value="$PROJECT_DIR$/movie/templates/admin/userloginlog_list.html" />
         <option value="$PROJECT_DIR$/movie/templates/admin/adminloginlog_list.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/auth_add.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/login.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/auth_edit.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/auth_list.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/role_add.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/role_edit.html" />
+        <option value="$PROJECT_DIR$/movie/admin/forms.py" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/role_list.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/admin_list.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/grid.html" />
+        <option value="$PROJECT_DIR$/movie/templates/admin/admin_add.html" />
+        <option value="$PROJECT_DIR$/movie/admin/views.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-34" />
-    <option name="y" value="43" />
-    <option name="width" value="1310" />
+    <option name="x" value="441" />
+    <option name="y" value="130" />
+    <option name="width" value="1473" />
     <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -247,6 +204,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,30 +233,6 @@
               <item name="flask_movie" type="b2602c69:ProjectViewProjectNode" />
               <item name="flask_movie" type="462c0819:PsiDirectoryNode" />
               <item name="movie" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flask_movie" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flask_movie" type="462c0819:PsiDirectoryNode" />
-              <item name="movie" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flask_movie" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flask_movie" type="462c0819:PsiDirectoryNode" />
-              <item name="movie" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="flask_movie" type="b2602c69:ProjectViewProjectNode" />
-              <item name="flask_movie" type="462c0819:PsiDirectoryNode" />
-              <item name="movie" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -312,7 +246,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -327,15 +260,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\flask_movie\movie\templates\home" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\flask_movie\movie\static\uploads" />
       <recent name="G:\flask_movie\movie\templates\admin" />
+      <recent name="G:\flask_movie\movie\static\uploads" />
       <recent name="G:\flask_movie\movie" />
       <recent name="G:\flask_movie\movie\static" />
       <recent name="G:\flask_movie\movie\static\tpl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\flask_movie\movie\templates\home" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -418,18 +351,20 @@
       <workItem from="1548507734413" duration="10231000" />
       <workItem from="1548518208240" duration="15000" />
       <workItem from="1548570129964" duration="13849000" />
-      <workItem from="1548675475250" duration="11765000" />
+      <workItem from="1548675475250" duration="12049000" />
+      <workItem from="1548768420439" duration="5193000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59962000" />
+    <option name="totallyTimeSpent" value="65439000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-27" y="35" width="1048" height="824" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5018868" side_tool="true" weight="0.16262627" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49811321" visible="true" weight="0.16262627" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49811321" visible="true" weight="0.18632708" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.19571045" />
@@ -439,13 +374,13 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.23410405" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.21715818" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3297587" />
-      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.2" />
+      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.23458445" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="SciView" order="2" weight="0.3297587" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
@@ -456,85 +391,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/D_files/python/python37/Lib/site-packages/wtforms/fields/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/D_files/python/python37/Lib/site-packages/wtforms/fields/simple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/D_files/python/python37/Lib/site-packages/wtforms/fields/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="22" lean-forward="true" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/D_files/python/python37/Lib/site-packages/wtforms/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#211#250#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/c184ef00-d8da-41e9-8e69-e24e42ccde7d/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../env1/e2/Lib/site-packages/wtforms/validators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="198" column="8" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/admin">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1251984954/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15903">
-          <caret line="837" column="6" selection-start-line="837" selection-start-column="6" selection-end-line="837" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/tag_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1083">
-          <caret line="57" column="108" selection-start-line="57" selection-start-column="108" selection-end-line="57" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../env1/e2/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="2291" selection-start-line="2291" selection-end-line="2291" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/movie/templates/admin/tag_add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -566,15 +422,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901271445565c07cd04c4bd4688b9c050587311cfaf.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901272256482514cd0930db4bfc96214b355d61c788.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901262348386123964568d441d0a5fa6ed08fc330b7.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901271445565c07cd04c4bd4688b9c050587311cfaf.png" />
+    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901272256482514cd0930db4bfc96214b355d61c788.png" />
+    <entry file="file://$PROJECT_DIR$/movie/static/uploads/201901262348386123964568d441d0a5fa6ed08fc330b7.png" />
     <entry file="file://$PROJECT_DIR$/movie/templates/admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -582,27 +432,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/movie_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding>
-            <element signature="e#1429#1452#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/movie/templates/admin/movie_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
           <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/preview_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="27" column="6" lean-forward="true" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -735,55 +568,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#p#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/admin/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="246" column="33" lean-forward="true" selection-start-line="246" selection-start-column="33" selection-end-line="246" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/oplog_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="44" column="51" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/oplog">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie/templates/admin/grid.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="133" column="80" selection-start-line="133" selection-start-column="80" selection-end-line="133" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/adminlog">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -797,20 +582,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie/admin/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="582" column="37" lean-forward="true" selection-start-line="582" selection-start-column="37" selection-end-line="582" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+    <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/adminlog">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/movie/templates/admin/userloginlog_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
+        <state relative-caret-position="893">
           <caret line="47" column="7" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/oplog_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="44" column="51" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -818,6 +607,146 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
           <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/movie_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/preview_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="34" column="40" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="34" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/auth_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/auth_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="43" column="48" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="43" selection-end-column="48" />
+          <folding>
+            <element signature="e#1178#1195#0#HTML" expanded="true" />
+            <element signature="e#1892#1909#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/auth_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="51" column="44" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="51" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/role_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/role">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../env1/e2/Lib/site-packages/flask_sqlalchemy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="911" selection-start-line="911" selection-end-line="911" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/role_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/admin/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-186">
+          <caret line="325" column="20" selection-start-line="325" selection-start-column="20" selection-end-line="325" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/grid.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="192" column="32" lean-forward="true" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/role_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="67" column="60" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/templates/admin/admin_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-452">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie/admin/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c184ef00-d8da-41e9-8e69-e24e42ccde7d/schema/movie1/table/admin">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
