@@ -24,7 +24,7 @@ def create_app():
     app.config['SECRET_KEY'] = '123456'
 
     app.config["UP_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static","uploads")
-
+    app.config["FC_DIR"] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static", "fcloads")
     @app.errorhandler(404)
     def page_not_found(error):
         """
