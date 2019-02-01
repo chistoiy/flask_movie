@@ -10,5 +10,5 @@ a website for movie with flask
 * 0.5-[收藏管理，密码修改，用户头像设置](https://github.com/chistoiy/flask_movie/tree/f6ec4ee17a3f17a8002d6d345b835080ac864885)  
 * 0.6-[操作/管理员登陆/用户登录日志保存与查看](https://github.com/chistoiy/flask_movie/tree/7ba53ec65b45785be7ba2da242206d5c5068b0bf)
 # [第四阶段-权限/角色/管理员管理设置及权限配置](https://github.com/chistoiy/flask_movie/tree/3bab2a69e4505d56a13ea95fa1e323bd0a5684f6)
-# [第五阶段-用户注册，修改/登录日志查看](https://github.com/chistoiy/flask_movie/tree/a0a32add09889db1e4776322e6e29220df784254)
-
+# [第五阶段-用户注册，修改/登录日志查看](https://github.com/chistoiy/flask_movie/tree/a0a32add09889db1e4776322e6e29220df784254)  
+# [第六阶段-视频播放，弹幕](https://github.com/chistoiy/flask_movie/tree/9c45c1281f141fc435ba5b050acb272377c92185)
