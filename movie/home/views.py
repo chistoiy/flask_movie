@@ -1,9 +1,77 @@
-from flask import request,session,render_template,redirect,url_for,flash
+from flask import request,session,render_template,redirect,url_for,flash,Response
 from . import home
-
+'''
 @home.route('/',methods=["GET"])
 def index():
     return render_template('/home/index.html')
+'''
+from movie.models import Tag,Movie
+@home.route("/<int:page>/", methods=["GET"])
+@home.route("/", methods=["GET"])
+def index(page=None):
+    """
+    首页电影列表
+    """
+    tags = Tag.query.all()
+    page_data = Movie.query
+    # 标签
+    tid = request.args.get("tid", 0)
+    if int(tid) != 0:
+        page_data = page_data.filter_by(tag_id=int(tid))
+    # 星级
+    star = request.args.get("star", 0)
+    if int(star) != 0:
+        page_data = page_data.filter_by(star=int(star))
+    # 时间
+    time = request.args.get("time", 0)
+    if int(time) != 0:
+        if int(time) == 1:
+            page_data = page_data.order_by(
+                Movie.addtime.desc()
+            )
+        else:
+            page_data = page_data.order_by(
+                Movie.addtime.asc()
+            )
+    # 播放量
+    pm = request.args.get("pm", 0)
+    if int(pm) != 0:
+        if int(pm) == 1:
+            page_data = page_data.order_by(
+                Movie.playnum.desc()
+            )
+        else:
+            page_data = page_data.order_by(
+                Movie.playnum.asc()
+            )
+    # 评论量
+    cm = request.args.get("cm", 0)
+    if int(cm) != 0:
+        if int(cm) == 1:
+            page_data = page_data.order_by(
+                Movie.commentnum.desc()
+            )
+        else:
+            page_data = page_data.order_by(
+                Movie.commentnum.asc()
+            )
+    if page is None:
+        page = 1
+    page_data = page_data.paginate(page=page, per_page=8)
+    p = dict(
+        tid=tid,
+        star=star,
+        time=time,
+        pm=pm,
+        cm=cm,
+    )
+    return render_template(
+        "home/index.html",
+        tags=tags,
+        p=p,
+        page_data=page_data)
+
+
 from functools import wraps
 def user_login_req(f):
     """
@@ -39,7 +107,8 @@ def login():
         )
         db.session.add(userlog)
         db.session.commit()
-        return redirect(url_for("home.user"))
+
+        return redirect(request.args.get("next") or url_for("home.user")  )
     return render_template("home/login.html", form=form)
 
 #退出
@@ -159,13 +228,27 @@ def pwd():
         return redirect(url_for('home.logout'))
     return render_template("home/pwd.html", form=form)
 
-
-@home.route("/comments/")
-def comments():
+from movie.models import Comment
+from .forms import CommentForm
+@home.route("/comments/<int:page>/")
+@user_login_req
+def comments(page=None):
     """
-    评论记录
+    个人中心评论记录
     """
-    return render_template("home/comments.html")
+    if page is None:
+        page = 1
+    page_data = Comment.query.join(
+        Movie
+    ).join(
+        User
+    ).filter(
+        Movie.id == Comment.movie_id,
+        User.id == session["user_id"]
+    ).order_by(
+        Comment.addtime.desc()
+    ).paginate(page=page, per_page=10)
+    return render_template("home/comments.html", page_data=page_data)
 
 
 @home.route("/loginlog/<int:page>/", methods=["GET"])
@@ -183,12 +266,52 @@ def loginlog(page=None):
     ).paginate(page=page, per_page=2)
     return render_template("home/loginlog.html", page_data=page_data)
 
-@home.route("/moviecol/")
-def moviecol():
+@home.route("/moviecol/<int:page>/")
+@user_login_req
+def moviecol(page=None):
     """
-    收藏电影
+    电影收藏
     """
-    return render_template("home/moviecol.html")
+    if page is None:
+        page = 1
+    page_data = Moviecol.query.join(
+        Movie
+    ).join(
+        User
+    ).filter(
+        Movie.id == Moviecol.movie_id,
+        User.id == session["user_id"]
+    ).order_by(
+        Moviecol.addtime.desc()
+    ).paginate(page=page, per_page=2)
+    return render_template("home/moviecol.html", page_data=page_data)
+
+
+from movie.models import Moviecol
+@home.route("/moviecol/add/", methods=["GET"])
+@user_login_req
+def moviecol_add():
+    """
+    添加电影收藏
+    """
+    uid = request.args.get("uid", "")
+    mid = request.args.get("mid", "")
+    moviecol = Moviecol.query.filter_by(
+        user_id=int(uid),
+        movie_id=int(mid)
+    ).count()    # 已收藏
+    if moviecol == 1:
+        data = dict(ok=0)    # 未收藏进行收藏
+    if moviecol == 0:
+        moviecol = Moviecol(
+            user_id=int(uid),
+            movie_id=int(mid)
+        )
+        db.session.add(moviecol)
+        db.session.commit()
+        data = dict(ok=1)
+    import json
+    return json.dumps(data)
 
 '''
 # 列表
@@ -196,22 +319,214 @@ def moviecol():
 def index():
     return render_template("home/index.html")
 '''
+
 # 动画
+from movie.models import Preview
 @home.route("/animation/")
 def animation():
-    return render_template("home/animation.html")
+    """
+    首页轮播动画
+    """
+    data = Preview.query.all()
+    return render_template("home/animation.html", data=data)
 
-@home.route("/search/")
-def search():
+
+@home.route("/search/<int:page>/")
+def search(page=None):
     """
     搜索
     """
-    return render_template("home/search.html")
+    if page is None:
+        page = 1
+    key = request.args.get("key", "")
+    movie_count = Movie.query.filter(
+        Movie.title.ilike('%' + key + '%')
+    ).count()
+    page_data = Movie.query.filter(
+        Movie.title.ilike('%' + key + '%')
+    ).order_by(
+        Movie.addtime.desc()
+    ).paginate(page=page, per_page=10)
+    page_data.key = key
+    return render_template("home/search.html", movie_count=movie_count, key=key, page_data=page_data)
 
-@home.route("/play/")
-def play():
+@home.route("/play/<int:id>/<int:page>/", methods=["GET", "POST"])
+def play(id=None, page=None):
     """
-    播放
+    播放电影
     """
-    return render_template("home/play.html")
+    movie = Movie.query.join(Tag).filter(
+        Tag.id == Movie.tag_id,
+        Movie.id == int(id)
+    ).first_or_404()
 
+    if page is None:
+        page = 1
+    page_data = Comment.query.join(
+        Movie
+    ).join(
+        User
+    ).filter(
+        Movie.id == movie.id,
+        User.id == Comment.user_id
+    ).order_by(
+        Comment.addtime.desc()
+    ).paginate(page=page, per_page=10)
+    form = CommentForm()
+    #print(form.data)
+    if "user" in session and form.validate_on_submit():
+        data = form.data
+        comment = Comment(
+            content=data["content"],
+            movie_id=movie.id,
+            user_id=session["user_id"]
+        )
+        db.session.add(comment)
+        db.session.commit()
+        #print('kkk')
+        movie.commentnum = movie.commentnum + 1
+        db.session.add(movie)
+        db.session.commit()
+        flash("添加评论成功！", "ok")
+        return redirect(url_for('home.play', id=movie.id, page=1))
+    # 放在后面避免添加评论播放量涨2
+    movie.playnum = movie.playnum + 1
+    db.session.add(movie)
+    db.session.commit()
+    return render_template("home/video.html", movie=movie, form=form, page_data=page_data)
+
+
+@home.route("/video/<int:id>/<int:page>/", methods=["GET", "POST"])
+def video(id=None, page=None):
+    """
+    弹幕播放器
+    """
+    movie = Movie.query.join(Tag).filter(
+        Tag.id == Movie.tag_id,
+        Movie.id == int(id)
+    ).first_or_404()
+
+    if page is None:
+        page = 1
+    page_data = Comment.query.join(
+        Movie
+    ).join(
+        User
+    ).filter(
+        Movie.id == movie.id,
+        User.id == Comment.user_id
+    ).order_by(
+        Comment.addtime.desc()
+    ).paginate(page=page, per_page=10)
+
+    movie.playnum = movie.playnum + 1
+    form = CommentForm()
+    if "user" in session and form.validate_on_submit():
+        data = form.data
+        comment = Comment(
+            content=data["content"],
+            movie_id=movie.id,
+            user_id=session["user_id"]
+        )
+        db.session.add(comment)
+        db.session.commit()
+        movie.commentnum = movie.commentnum + 1
+        db.session.add(movie)
+        db.session.commit()
+        flash("添加评论成功！", "ok")
+        return redirect(url_for('home.video', id=movie.id, page=1))
+    db.session.add(movie)
+    db.session.commit()
+    return render_template("home/video.html", movie=movie, form=form, page_data=page_data)
+
+
+import json,re
+@home.route('/upload/', methods=['GET', 'POST'])
+def upload():
+    from flask import current_app
+    #print(current_app.static_folder)
+    action = request.args.get('action')
+    with open(os.path.join(current_app.static_folder, 'ue', 'php','config.json')) as fp:
+        try:
+            # 删除 `/**/` 之间的注释
+            CONFIG = json.loads(re.sub(r'\/\*.*\*\/', '', fp.read()))
+        except:
+            CONFIG = {}
+
+    if action == 'config':
+        # 初始化时，返回配置文件给客户端
+        result = CONFIG
+
+    return json.dumps(result)
+from flask import current_app
+@home.route("/tm/v3/", methods=["GET", "POST"])
+def tm():
+    """
+    弹幕消息处理
+    """
+    import json
+    if request.method == "GET":
+        # 获取弹幕消息队列
+        id = request.args.get('id')
+
+        # 存放在redis队列中的键值
+        key = "movie" + str(id)
+
+        if current_app.config["rd"].llen(key):
+            print('asssssssss')
+            msgs = current_app.config["rd"].lrange(key, 0, 2999)
+            print('msgs',msgs)
+            res = {
+                "code": 0,
+                #"danmaku": [json.loads(v) for v in msgs],
+                # "player": str(id),
+                "data": [[i for i in json.loads(v).values()] for v in msgs],
+            }
+        else:
+            res = {
+                "code": 0,
+                #"danmaku": []
+                "data": []
+            }
+        resp = json.dumps(res)
+    if request.method == "POST":
+        # 添加弹幕
+
+        import datetime
+        data = json.loads(request.get_data())
+        print(data)
+        msg = {
+            #"__v": 0,
+
+            "time": data["time"],"type": data['type'], "color": data["color"],
+
+           "author": data["author"], "text": data["text"],
+
+            #"ip": request.remote_addr,
+            #"_id": datetime.datetime.now().strftime("%Y%m%d%H%M%S") + uuid.uuid4().hex,
+             #"player": data['id']
+        }
+        res = {
+            "code": 0,
+            "data": msg
+        }
+
+        resp = json.dumps(res)
+        # 将添加的弹幕推入redis的队列中
+        current_app.config["rd"].lpush("movie"+str(data['id']) , json.dumps(msg))
+        #print('aaa',json.loads(current_app.config["rd"].get('movie')))
+    return Response(resp, mimetype='application/json')
+
+'''
+{id: "11", author: "DIYgod", time: 36.529915, text: "啊啊啊啊啊啊啊啊啊啊", color: 16777215, type: 0}
+{"code":0,"data":{"_id":"5c532e881c056b0011e091d3","player":"11","author":"DIYgod","time":36.529915,"text":"啊啊啊啊啊啊啊啊啊啊","color":16777215,"type":0,"ip":"36.62.70.184","referer":"http://127.0.0.1:5000/play/11/1/","date":1548955272800,"__v":0}}
+{"code":0,"data":{"__v": 0, "author": "DIYgod", "time": 5.10689, "text": "\u963f\u4e09", "color": 16777215, "type": 0, "ip": "127.0.0.1", "_id": "201902010120536db963309c37439d8fe65258a79292da"}}
+{id: "11", author: "DIYgod", time: 5.10689, text: "阿三", color: 16777215, type: 0}
+
+{"code": 0, "player": "11",
+ "data": [
+ {"__v": 0, "author": "DIYgod", "time": 0, "text": "\u4f60\u597d\u963f\u4e09", "color": 16777215, "type": 0, "ip": "127.0.0.1", "_id": "20190201014003aeeae903116b4fa096d4e83dd18c1684", "player": "11"},
+  {"__v": 0, "author": "DIYgod", "time": 5.37298, "text": "\u5566\u5566\u5566\u5566\u5566\u5566\u5566\u5566\u5566\u5566", "color": 16777215, "type": 0, "ip": "127.0.0.1", "_id": "201902010137468d690d1b6f13475e99e45f86be08f294", "player": "11"}, 
+{"__v": 0, "author": "DIYgod", "time": 6.514021, "text": "\u4f60\u597d\u6c34\u6c34\u6c34\u6c34", "color": 16777215, "type": 0, "ip": "127.0.0.1", "_id": "20190201013632d0c583f730244f22a97b6722212b1408", "player": "11"}, 
+{"__v": 0, "author": "DIYgod", "time": 0, "text": "\u4f60\u597d", "color": 16777215, "type": 0, "ip": "127.0.0.1", "_id": "20190201013340504a0aae679045e5bc25b5d32437ad8d", "player": "11"}]}
+'''

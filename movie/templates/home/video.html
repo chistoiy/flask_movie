@@ -7,11 +7,11 @@
     <script src="{{ url_for('static',filename='dplayer/plugin/flv.min.js') }}"></script>
     <script src="{{ url_for('static',filename='dplayer/plugin/hls.min.js') }}"></script>
     <script src="{{ url_for('static',filename='dplayer/dist/DPlayer.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename='ueditor/ueditor.config.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename='ueditor/ueditor.all.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename='ueditor/lang/zh-cn/zh-cn.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='ue/ueditor.config.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='ue/ueditor.all.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='ue/lang/zh-cn/zh-cn.js') }}"></script>
     <script>
-        SyntaxHighlighter.all();
+        {#SyntaxHighlighter.all();#}
 
     </script>
     <!--播放页面-->
@@ -69,10 +69,10 @@
                             </td>
                             <td>
                                 <div>
-                                    {% for val in range(1,movie.star+1) %}
+                                    {% for val in range(1,movie.star + 1) %}
                                         <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
                                     {% endfor %}
-                                    {% for val in range(1,5-movie.star+1) %}
+                                    {% for val in range(1,5-movie.star + 1) %}
                                         <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
                                     {% endfor %}
                                 </div>
@@ -200,26 +200,54 @@
 
 {% block js %}
     <!--播放页面-->
-    <script>
-        var dp1 = new DPlayer({
-            element: document.getElementById('dplayer1'),
-            video: {
-                <!-- url: "{{ url_for('static',filename='uploads/'+movie.url) }}", -->
-				url: "http://of66as8gb.bkt.clouddn.com/12.2%20xss%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86%E5%8F%8A%E9%98%B2%E8%8C%83.mp4",
-            },
-            danmaku: {
-                id: '{{ movie.id }}',
-                api: "/tm/"
-            }
-        });
-    </script>
+{#    <script>#}
+{#        var dp1 = new DPlayer({#}
+{#            element: document.getElementById('dplayer1'),#}
+{#            video: {#}
+{#                url: "{{ url_for('static',filename='uploads/'+movie.url) }}",#}
+				{#url: "http://of66as8gb.bkt.clouddn.com/12.2%20xss%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86%E5%8F%8A%E9%98%B2%E8%8C%83.mp4",#}
+{#            },#}
+{#            danmaku: {#}
+{#                id: '{{ movie.id }}',#}
+{#                api: "/tm/"#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+
+{#    <link href="https://www.moerats.com/usr/dplayer/DPlayer.min.css" rel="stylesheet">#}
+{#<div id="dplayer"></div>#}
+{#<script src="https://www.moerats.com/usr/dplayer/DPlayer.min.js"></script>#}
+{#<script src="https://cdnjs.loli.net/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>#}
+<script>
+
+
+ var dp1 = new DPlayer({
+    element: document.getElementById('dplayer1'),
+    video: {
+        url: "{{ url_for('static',filename='uploads/'+movie.url) }}",
+        type:"auto",
+  },
+
+  danmaku: {
+        id:'{{ movie.id }}',
+        {#api: 'https://dplayer.moerats.com/'    //这里填写弹幕地址#}
+      api:"/tm/"
+    }
+});
+
+ dp1.danmaku.show()
+
+ {#dp.danmaku.show()#}
+ {#dp1.seek(12.868423);#}
+ {#dp1.notice('ll啊发发',1500);#}
+</script>
     <script>
         var ue = UE.getEditor('input_content', {
             toolbars: [
                 ['fullscreen', 'emotion', 'preview', 'link']
             ],
             initialFrameWidth: "100%",
-            initialFrameHeight: "100",
+            initialFrameHeight: "100",serverUrl: "/upload/",
         });
 
     </script>

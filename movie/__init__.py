@@ -1,5 +1,5 @@
 from flask import Flask,render_template
-
+from flask_redis import FlaskRedis
 import os
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
@@ -32,4 +32,7 @@ def create_app():
         """
         return render_template("home/404.html"), 404
 
+    app.config["REDIS_URL"] = "redis://127.0.0.1:6379/0"
+    rd = FlaskRedis(app)
+    app.config['rd']=rd
     return app
